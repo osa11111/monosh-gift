@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>هدية 🎁</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      direction: rtl;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: linear-gradient(to bottom, #ffc0cb, #ffe4e1);
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .start-screen, .main-message {
+      text-align: center;
+      color: #fff;
+    }
+    .start-screen {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #ffb6c1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 10;
+    }
+    .start-screen button {
+      font-size: 24px;
+      padding: 15px 30px;
+      background-color: #fff;
+      color: #ff69b4;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #fff;
+    }
+    .main-message {
+      font-size: 36px;
+      padding: 20px;
+      display: none;
+      max-width: 90%;
+      z-index: 1;
+    }
+    .typing-text {
+      display: inline;
+      font-size: 42px;
+      line-height: 1.6;
+    }
+    .float-item {
+      position: absolute;
+      font-size: 32px;
+      animation: float 10s linear infinite;
+    }
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="start-screen">
+    <h1 style="font-size: 48px;">🎁 اضغط هنا لاستلام الهدية</h1>
+    <button onclick="startMessage()">افتح الهدية</button>
+  </div>
+
+  <div class="main-message">
+    <h1>منوش 🎂💖</h1>
+    <p class="typing-text" id="typing-text"></p>
+  </div>
+
+  <script>
+    const text = `
+عيد ميلاد سعيد يا منوش 🎉🎉
+اليوم 11/6/2024 يعني مرت 17 سنة على ميلاد إنسانة مميزة جداً 💝
+منوش، وجودك في الدنيا فرحة، وكلامك أمان، وابتسامتك دواء.
+كل سنة وأنتِ أقرب لأحلامك، أقوى من كل سنة قبلها، وأجمل من كل الأيام الماضية 🌟
+
+أنتِ مش مجرد صديقة… أنتِ أخت، وونيس، وسر فرح كثيرين.
+أتمنى هالسنة تكون سنة مفصلية بحياتك… سنة إنجازات كبيرة، ضحك ما يوقف، وراحة تعانقك كل يوم.
+
+يا رب تحققي كل شيء تتمنيه، وتعيشي عمر كله حب وسلام.
+أحب أقولك: وجودك بالدنيا هدية، وميلادك نعمة لكل اللي يعرفوك 🎀
+
+🎈🎈 كل سنة وأنتِ بخير منوش… وعقبال 100 سنة 🎈🎈
+`;
+
+    function startMessage() {
+      document.querySelector('.start-screen').style.display = 'none';
+      document.querySelector('.main-message').style.display = 'block';
+      typeText();
+      setInterval(createFloatingItems, 10000);
+    }
+
+    let i = 0;
+    function typeText() {
+      if (i < text.length) {
+        document.getElementById("typing-text").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeText, 90);
+      }
+    }
+
+    function createFloatingItems() {
+      for (let i = 0; i < 10; i++) {
+        let item = document.createElement("div");
+        item.className = "float-item";
+        item.innerHTML = Math.random() > 0.5 ? "🌹" : "❤️";
+        item.style.left = Math.random() * 100 + "vw";
+        item.style.top = "100vh";
+        document.body.appendChild(item);
+
+        setTimeout(() => {
+          document.body.removeChild(item);
+        }, 10000);
+      }
+    }
+  </script>
+
+</body>
+</html>
